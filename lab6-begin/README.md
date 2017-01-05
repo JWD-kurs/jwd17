@@ -15,7 +15,7 @@ Glavna ideja SPA je da se renderuju i menjaju samo oni elementi korisničkog int
 Menjanje elemenata korisničkog interfejsa uglavnom podrazumeva intenzivnu manipulaciju HTML-om i DOM-om unutar stranice.
 
 Postoji veliki broj JavaScript biblioteka koje služe za pravljenje SPA (AngularJS, Backbone.js, Ember.js...). Na ovom kursu
-će biti korišćen AngularJS (najnovija verzija (u trenutku izvođenja kursa) - 1.5.5).
+će biti korišćen AngularJS.
 
 ### AngularJS
 
