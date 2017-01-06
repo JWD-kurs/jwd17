@@ -14,16 +14,23 @@ wafepaApp.controller('myCtrl1', function($scope){
 wafepaApp.controller('innerCtrl', function($scope){
 	$scope.text = "Nova vrednost";
 });
-
-wafepaApp.config(['$routeProvider', function($routeProvider) {
+//od Angular 1.6 default hash prefiks vise nije '' nego je '!'
+//to znaci da putanja nece biti ...index.html/#/activities 
+//nego ce biti index.html/#!/activities 
+wafepaApp.config(function($routeProvider) {
     $routeProvider
-        .when('/', {
+        //http://localhost:8080/static/app/html/index.html/#!/
+        .when("/", {
             templateUrl : '/static/app/html/partials/home.html'
         })
+        //http://localhost:8080/static/app/html/index.html/#!/activities
         .when('/activities', {
              templateUrl : '/static/app/html/partials/activities.html'
         })
+        //sve ostalo radi redirekciju na
+        //http://localhost:8080/static/app/html/index.html/#!/
         .otherwise({
              redirectTo: '/'
         });
-}]);
+
+});
