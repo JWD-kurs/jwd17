@@ -14,6 +14,50 @@ wafepaApp.controller('myCtrl1', function($scope){
 wafepaApp.controller('innerCtrl', function($scope){
 	$scope.text = "Nova vrednost";
 });
+
+wafepaApp.controller('activitiesCtrl',function ($scope, $http) {
+    //preuzimanje svih aktivnosti
+    var ucitajSve = function () {
+       //config objekat pomogcu kog saljemo paramtri pretrage
+       var config = {}
+       //ako postoji fiterActivity.name, postavimo parametar pretrage
+       if($scope.filterActivity&&$scope.filterActivity.name){
+        config={'params':{'name':$scope.filterActivity.name}}
+       }
+       //then se pozove kada pristigne odgovor sa servera
+       $http.get('/api/activities',config).then(function (resp) {
+         $scope.activities = resp.data;
+         $scope.activity={}
+       });
+    }
+
+   ucitajSve();
+   
+   $scope.filtriraj = ucitajSve;
+
+   $scope.brisanje = function (id) {
+    $http.delete('/api/activities/'+id).then(ucitajSve) 
+   }
+
+   $scope.sacuvaj = function () {
+    //ako $scope.activity nema id, onda je novokreirana 
+    if(!$scope.activity.id){
+        $http.post('/api/activities/',$scope.activity).then(ucitajSve);
+    }
+    //ako $scope.activity ima id, onda se menja postojeca aktivnost 
+    else{
+        $http.put('/api/activities/'+$scope.activity.id,$scope.activity).then(ucitajSve);
+    }
+   }
+
+   $scope.postaviAktivnost = function (a) {
+    //u $scope postavljamo kopiju aktivnosti 
+    //da ne bi izmena aktivnosti u formi odmah menjala i
+    //aktivnost u listi
+    $scope.activity = angular.copy(a);
+   }
+});
+
 //od Angular 1.6 default hash prefiks vise nije '' nego je '!'
 //to znaci da putanja nece biti ...index.html/#/activities 
 //nego ce biti index.html/#!/activities 

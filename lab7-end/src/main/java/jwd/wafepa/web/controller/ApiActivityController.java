@@ -65,7 +65,9 @@ public class ApiActivityController {
 
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<ActivityDTO> add(@RequestBody ActivityDTO newActivity) {
-
+		
+		System.out.println("Activity: "+newActivity);
+		
 		Activity savedActivity = activityService.save(toActivity
 				.convert(newActivity));
 

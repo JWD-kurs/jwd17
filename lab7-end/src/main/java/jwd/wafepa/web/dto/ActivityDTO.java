@@ -17,6 +17,10 @@ public class ActivityDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
+	@Override
+	public String toString() {
+		return "ActivityDTO [id=" + id + ", name=" + name + "]";
+	}
 	
 	
 }
