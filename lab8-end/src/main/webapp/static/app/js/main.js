@@ -15,6 +15,30 @@ wafepaApp.controller('innerCtrl', function($scope){
 	$scope.text = "Nova vrednost";
 });
 
+wafepaApp.controller('activityCtrl', 
+  function($scope, $http,$location, $routeParams){
+  $http.get('/api/activities/'+$routeParams.id).then(function (resp) {
+   $scope.activity = resp.data;
+  });
+
+
+  $scope.sacuvaj=function () {
+    //ako $scope.activity nema id, onda je novokreirana 
+    if(!$scope.activity.id){
+        $http.post('/api/activities/',$scope.activity).then(function () {
+            $location.path('/activities');   
+        });
+    }
+    //ako $scope.activity ima id, onda se menja postojeca aktivnost 
+    else{
+        $http.put('/api/activities/'+$scope.activity.id,$scope.activity).then(function () {
+          $location.path('/activities');   
+        });
+    }
+
+  }
+});
+
 wafepaApp.controller('activitiesCtrl',function ($scope, $http) {
     //preuzimanje svih aktivnosti
     var ucitajSve = function () {
@@ -70,6 +94,10 @@ wafepaApp.config(function($routeProvider) {
         //http://localhost:8080/static/app/html/index.html/#!/activities
         .when('/activities', {
              templateUrl : '/static/app/html/partials/activities.html'
+        })
+        //http://localhost:8080/static/app/html/index.html/#!/activity
+        .when('/activity/:id', {
+             templateUrl : '/static/app/html/partials/activity.html'
         })
         //sve ostalo radi redirekciju na
         //http://localhost:8080/static/app/html/index.html/#!/
