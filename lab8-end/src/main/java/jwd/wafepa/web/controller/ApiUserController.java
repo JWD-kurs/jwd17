@@ -35,7 +35,8 @@ public class ApiUserController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	ResponseEntity<List<UserDTO>> getUser(
-			@RequestParam(defaultValue = "0") int page) {
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam() String name) {
 		Page<User> usersPage = userService.findAll(page);
 
 		if (page > usersPage.getTotalPages()) {
