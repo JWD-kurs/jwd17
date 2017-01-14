@@ -2,6 +2,8 @@ package jwd.wafepa.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import jwd.wafepa.model.Activity;
 
 public interface ActivityService {
@@ -17,7 +19,7 @@ public interface ActivityService {
 	 *  
 	 * @return List of all existing activities.
 	 */
-	List<Activity> findAll();
+	Page<Activity> findAll(int page);
 	
 	/**
 	 * Persists an activity. If activity's id is null,
@@ -32,7 +34,7 @@ public interface ActivityService {
 	 * @param activities
 	 * @return
 	 */
-	List<Activity> save(List<Activity> activities);
+	Iterable<Activity> save(List<Activity> activities);
 	
 	/**
 	 * Deletes an activity having specified ID.
@@ -55,7 +57,7 @@ public interface ActivityService {
 	 * @return List of Activities who's name equals the string
 	 * given in the {@code name} parameter.
 	 */
-	List<Activity> findByName(String name);
+	Page<Activity> findByName(String name, int page);
 	
 	
 	

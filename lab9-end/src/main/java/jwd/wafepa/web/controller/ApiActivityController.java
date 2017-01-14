@@ -3,6 +3,7 @@ package jwd.wafepa.web.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,17 +34,20 @@ public class ApiActivityController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	ResponseEntity<List<ActivityDTO>> getActivities(
-			@RequestParam(value = "name", required = false) String name) {
+			@RequestParam(value = "name", required = false) String name,
+			@RequestParam(defaultValue = "0") int page) {
 
-		List<Activity> activities;
+		Page<Activity> activities;
 
 		if (name != null) {
-			activities = activityService.findByName(name);
+			activities = activityService.findByName(name, page);
 		} else {
-			activities = activityService.findAll();
+			activities = activityService.findAll(page);
 		}
 
-		return new ResponseEntity<>(toDTO.convert(activities), HttpStatus.OK);
+		List<Activity> retVal = activities.getContent();
+		
+		return new ResponseEntity<>(toDTO.convert(retVal), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
