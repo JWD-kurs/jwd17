@@ -40,6 +40,14 @@ wafepaApp.controller('activityCtrl',
 });
 
 wafepaApp.controller('activitiesCtrl',function ($scope, $http, $location) {
+  $scope.getAddressAsString = function(user){
+    retVal = '';
+    for (var i = 0; i < user.addresses.length; i++) {
+      retVal += user.addresses[i].streat + ' ';
+    };
+    return retVal;
+  }
+
   $scope.brojacStranice = 0;
 
   $scope.changePage = function (i) {

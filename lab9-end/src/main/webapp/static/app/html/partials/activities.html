@@ -18,11 +18,14 @@
 		<tr>
 			<th>id</th>
 			<th>name</th>
+			<th>user</th>
 			<th>action</th>
 		</tr>
 		<tr ng-repeat="activity in activities">
 			<td>{{activity.id}}</td>
 			<td>{{activity.name}}</td>
+			<td>{{activity.user.firstname}} {{activity.user.lastname}}<br />
+				{{getAddressAsString(activity.user)}}</span></td>
 			<td>			
 				<button class="btn btn-danger" ng-click="brisanje(activity.id)">delete</button>
 				<button class="btn btn-success" ng-click="postaviAktivnost(activity)">edit</button>
