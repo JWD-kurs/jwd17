@@ -65,6 +65,7 @@ wafepaApp.controller('activitiesCtrl',function ($scope, $http, $location) {
        //then se pozove kada pristigne odgovor sa servera
        $http.get('/api/activities',config).then(function (resp) {
          $scope.activities = resp.data;
+         $scope.totalPages = Number(resp.headers().totalpages);
          $scope.activity={}
        });
      }

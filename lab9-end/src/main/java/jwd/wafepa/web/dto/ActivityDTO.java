@@ -3,8 +3,14 @@ package jwd.wafepa.web.dto;
 public class ActivityDTO {
 	private Long id;
 	private String name;
+	private UserDTO user;
 	
-	
+	public UserDTO getUser() {
+		return user;
+	}
+	public void setUser(UserDTO user) {
+		this.user = user;
+	}
 	public Long getId() {
 		return id;
 	}

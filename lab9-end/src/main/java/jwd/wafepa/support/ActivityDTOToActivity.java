@@ -30,7 +30,7 @@ public class ActivityDTOToActivity
 			}
 		}
 		
-		activity.setId(dto.getId());
+//		activity.setId(dto.getId());
 		activity.setName(dto.getName());
 		
 		return activity;

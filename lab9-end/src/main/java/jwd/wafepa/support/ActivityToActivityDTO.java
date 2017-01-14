@@ -12,7 +12,9 @@ import jwd.wafepa.web.dto.ActivityDTO;
 @Component
 public class ActivityToActivityDTO 
 	implements Converter<Activity, ActivityDTO> {
-
+	
+	private UserToUserDTO userConverter = new UserToUserDTO();
+	
 	@Override
 	public ActivityDTO convert(Activity activity) {
 		if(activity==null){
@@ -23,6 +25,7 @@ public class ActivityToActivityDTO
 		
 		dto.setId(activity.getId());
 		dto.setName(activity.getName());
+		dto.setUser(userConverter.convert(activity.getUser()));
 		
 		return dto;
 	}

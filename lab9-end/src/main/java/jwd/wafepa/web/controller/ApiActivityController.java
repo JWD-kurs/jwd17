@@ -3,7 +3,9 @@ package jwd.wafepa.web.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.Headers;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,10 +46,11 @@ public class ApiActivityController {
 		} else {
 			activities = activityService.findAll(page);
 		}
-
+		HttpHeaders headers = new HttpHeaders();
 		List<Activity> retVal = activities.getContent();
-		
-		return new ResponseEntity<>(toDTO.convert(retVal), HttpStatus.OK);
+		int totalPages = activities.getTotalPages();
+		headers.add("TotalPages", totalPages+"");
+		return new ResponseEntity<>(toDTO.convert(retVal), headers, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)

@@ -12,6 +12,8 @@ import jwd.wafepa.web.dto.UserDTO;
 @Component
 public class UserToUserDTO implements Converter<User, UserDTO> {
 
+	AddressToAddressDTO addressConverter = new AddressToAddressDTO();
+	
 	@Override
 	public UserDTO convert(User user) {
 		UserDTO dto = new UserDTO();
@@ -20,7 +22,7 @@ public class UserToUserDTO implements Converter<User, UserDTO> {
 		dto.setFirstname(user.getFirstName());
 		dto.setLastname(user.getLastName());
 		dto.setEmail(user.getEmail());
-		
+		dto.setAddresses(addressConverter.convert(user.getAddresses()));
 		return dto;
 	}
 	

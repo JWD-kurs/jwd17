@@ -1,12 +1,21 @@
 package jwd.wafepa.web.dto;
 
+import java.util.List;
+
 
 public class UserDTO {
 	private Long id;
 	private String email;
 	private String firstname;
 	private String lastname;
+	private List<AddressDTO> addresses;
 	
+	public List<AddressDTO> getAddresses() {
+		return addresses;
+	}
+	public void setAddresses(List<AddressDTO> addresses) {
+		this.addresses = addresses;
+	}
 	public Long getId() {
 		return id;
 	}
