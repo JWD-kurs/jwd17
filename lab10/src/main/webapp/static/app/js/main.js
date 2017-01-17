@@ -113,6 +113,40 @@ wafepaApp.controller('activitiesCtrl',function ($scope, $http, $location) {
   }
 });
 
+wafepaApp.controller('knjigeCtrl', function($scope, $http){
+
+
+  var ucitajKnjige = function () {
+    $http.get('/api/knjiga').then(function (resp) {
+      $scope.knjige = resp.data;
+    });
+  }
+
+
+  var ucitajAutore = function () {
+    $http.get('/api/autori').then(function (resp) {
+      $scope.autori = resp.data;
+    });
+  }
+
+
+  ucitajKnjige();
+  ucitajAutore();
+
+  
+    $scope.sacuvaj = function () {
+    //ako $scope.activity nema id, onda je novokreirana 
+    // if(!$scope.activity.id){
+      $http.post('/api/knjiga/',$scope.knjiga).then(ucitajKnjige);
+    // }
+    //ako $scope.activity ima id, onda se menja postojeca aktivnost 
+    // else{
+      // $http.put('/api/activities/'+$scope.activity.id,$scope.activity).then(ucitajSve);
+    // }
+  }
+
+});
+
 //od Angular 1.6 default hash prefiks vise nije '' nego je '!'
 //to znaci da putanja nece biti ...index.html/#/activities 
 //nego ce biti index.html/#!/activities 
@@ -129,6 +163,10 @@ wafepaApp.config(function($routeProvider) {
         //http://localhost:8080/static/app/html/index.html/#!/activity
         .when('/activity/:id', {
          templateUrl : '/static/app/html/partials/activity.html'
+       })
+        //http://localhost:8080/static/app/html/index.html/#!/activity
+        .when('/knjige', {
+         templateUrl : '/static/app/html/partials/knjige.html'
        })
         //sve ostalo radi redirekciju na
         //http://localhost:8080/static/app/html/index.html/#!/

@@ -7,9 +7,13 @@ import org.springframework.stereotype.Component;
 
 import jwd.wafepa.model.Activity;
 import jwd.wafepa.model.Address;
+import jwd.wafepa.model.Autor;
+import jwd.wafepa.model.Knjiga;
 import jwd.wafepa.model.User;
 import jwd.wafepa.service.ActivityService;
 import jwd.wafepa.service.AddressService;
+import jwd.wafepa.service.AutorService;
+import jwd.wafepa.service.KnjigaService;
 import jwd.wafepa.service.UserService;
 
 @Component
@@ -24,6 +28,12 @@ public class TestData {
 	@Autowired
 	private ActivityService activityService;
 
+	@Autowired
+	private KnjigaService knjigaService;
+	
+	@Autowired
+	private AutorService autorService;
+	
 	@PostConstruct
 	public void init(){
 //	       for (int i = 1; i <= 100; i++) {
@@ -47,5 +57,17 @@ public class TestData {
 //	            a.setUser(user);
 //	            activityService.save(a);
 //	       }
+//		Knjiga k;
+//		Autor a;
+//		for (int i = 0; i < 30; i++) {
+//			
+//			a = new Autor("Ime_"+i, "Prezime_"+i);
+//			a = autorService.save(a);
+//			
+//			k = new Knjiga("Naslov_"+i, "1980.");
+//			k.setAutor(a);
+//			knjigaService.save(k);
+//		}
+	
 	}
 }
